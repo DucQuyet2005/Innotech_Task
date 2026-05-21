@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -27,6 +27,7 @@ const Login: React.FC = () => {
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             <button type="submit">Login</button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
+            <p>Bạn chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link></p>
         </form>
     );
 };

@@ -23,7 +23,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     const fetchMe = async () => {
         try {
-            const res = await api.get('/auth/me');
+            const res = await api.get('/api/auth/me');
             setUser(res.data);
         } catch (err) {
             setUser(null);
@@ -37,16 +37,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }, []);
 
     const login = async (email: string, password: string) => {
-        const res = await api.post('/auth/login', { email, password });
+        const res = await api.post('/api/auth/login', { email, password });
         setUser(res.data.user);
     };
 
     const register = async (name: string, email: string, password: string) => {
-        await api.post('/auth/register', { name, email, password });
+        await api.post('/api/auth/register', { name, email, password });
     };
 
     const logout = async () => {
-        await api.post('/auth/logout');
+        await api.post('/api/auth/logout');
         setUser(null);
     };
 
