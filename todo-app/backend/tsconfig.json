@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    // Môi trường và tính năng mới nhất
+    "lib": [
+      "ESNext"
+    ],
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "allowJs": true,
+    "types": [
+      "bun"
+    ],
+    // Bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    // Best practices - bật strict mode
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    // Flags bổ sung
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false,
+    // Base URL cho import paths
+    "baseUrl": "./src"
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
