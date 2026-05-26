@@ -1,0 +1,211 @@
+/* ===========================================
+ * COMMENT ITEM STYLES
+ * ===========================================
+ * 
+ * Styles cho từng comment item trong tree.
+ * Hỗ trợ nested indentation, thread lines,
+ * hover effects, và responsive layout.
+ */
+
+.comment-item {
+  position: relative;
+  animation: fadeInUp var(--transition-base) ease-out;
+  animation-fill-mode: both;
+}
+
+.comment-item.is-root {
+  padding: 16px 20px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.comment-item.is-root:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Show delete button on hover */
+.comment-item:hover > .comment-content-wrapper > .comment-body > .action-buttons > .delete-btn {
+  opacity: 1;
+}
+
+/* Thread line cho nested replies */
+.comment-item.is-reply {
+  padding-left: 20px;
+  margin-top: 2px;
+}
+
+.thread-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--thread-line);
+  border-radius: 1px;
+  transition: background var(--transition-fast);
+}
+
+.comment-item.is-reply:hover > .thread-line {
+  background: var(--thread-line-hover);
+}
+
+/* Comment content wrapper */
+.comment-content-wrapper {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+/* Avatar */
+.comment-avatar {
+  flex-shrink: 0;
+}
+
+.comment-avatar img {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 2px solid var(--border-light);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.comment-item.is-root > .comment-content-wrapper > .comment-avatar img {
+  width: 40px;
+  height: 40px;
+}
+
+.comment-avatar img:hover {
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
+/* Comment body */
+.comment-body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Header */
+.comment-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+
+.comment-author {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.comment-time {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+/* Content text */
+.comment-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Replies section */
+.replies-section {
+  margin-left: 20px;
+  position: relative;
+}
+
+/* Collapse toggle */
+.collapse-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  margin: 4px 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.collapse-toggle:hover {
+  background: var(--accent-light);
+}
+
+.collapse-toggle svg {
+  font-size: 14px;
+  transition: transform var(--transition-fast);
+}
+
+/* Replies list */
+.replies-list {
+  animation: fadeIn var(--transition-base) ease-out;
+}
+
+/* Depth-based sizing (progressively smaller avatars at deeper levels) */
+.comment-item.depth-1 .comment-content-wrapper > .comment-avatar img,
+.comment-item.depth-2 .comment-content-wrapper > .comment-avatar img,
+.comment-item.depth-3 .comment-content-wrapper > .comment-avatar img,
+.comment-item.depth-4 .comment-content-wrapper > .comment-avatar img,
+.comment-item.depth-5 .comment-content-wrapper > .comment-avatar img,
+.comment-item.depth-6 .comment-content-wrapper > .comment-avatar img {
+  width: 32px;
+  height: 32px;
+}
+
+/* Stagger animation delays for sequential appearance */
+.comment-item:nth-child(1) { animation-delay: 0ms; }
+.comment-item:nth-child(2) { animation-delay: 50ms; }
+.comment-item:nth-child(3) { animation-delay: 100ms; }
+.comment-item:nth-child(4) { animation-delay: 150ms; }
+.comment-item:nth-child(5) { animation-delay: 200ms; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .comment-item.is-root {
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .comment-item.is-reply {
+    padding-left: 14px;
+  }
+
+  .replies-section {
+    margin-left: 14px;
+  }
+
+  .comment-content-wrapper {
+    gap: 10px;
+  }
+
+  .comment-avatar img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .comment-author {
+    font-size: 13px;
+  }
+
+  .comment-text {
+    font-size: 13px;
+  }
+}

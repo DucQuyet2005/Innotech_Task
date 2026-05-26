@@ -1,0 +1,90 @@
+/* ===========================================
+ * ACTION BUTTONS STYLES
+ * =========================================== */
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-tertiary);
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.action-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.action-btn svg {
+  font-size: 14px;
+  transition: transform var(--transition-fast);
+}
+
+.action-label {
+  font-size: 12px;
+}
+
+.action-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 14px;
+  text-align: center;
+}
+
+/* Like Button */
+.like-btn:hover {
+  background: var(--like-bg);
+  color: var(--like-color);
+}
+
+.like-btn:hover svg {
+  transform: scale(1.15);
+}
+
+.like-btn.liked {
+  color: var(--like-color);
+  background: var(--like-bg);
+}
+
+.like-btn.liked svg {
+  animation: heartBeat 0.4s ease-out;
+}
+
+.like-btn.liked .action-count {
+  color: var(--like-color);
+}
+
+/* Reply Button */
+.reply-btn:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+/* Delete Button */
+.delete-btn {
+  margin-left: auto;
+  opacity: 0;
+  transition: all var(--transition-fast);
+}
+
+.delete-btn:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}

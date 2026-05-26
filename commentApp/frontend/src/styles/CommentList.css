@@ -1,0 +1,106 @@
+/* ===========================================
+ * COMMENT LIST STYLES
+ * =========================================== */
+
+.comment-list-container {
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+/* Header */
+.comments-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.comments-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comments-icon {
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.comments-title h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.comment-count {
+  color: var(--text-tertiary);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.refresh-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+  transform: rotate(90deg);
+}
+
+/* Comments tree */
+.comments-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Error state */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px 24px;
+}
+
+.error-message {
+  font-size: 15px;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.retry-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--danger);
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.retry-btn:hover {
+  background: var(--danger);
+  color: white;
+}

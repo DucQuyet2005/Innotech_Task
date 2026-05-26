@@ -1,86 +1,37 @@
-import { Router, type Request, type Response } from 'express';
-import { commentsStore, getNextId, findCommentAndParent } from '@/data/data';
-import type { Comment } from '@/types/type';
+/**
+ * ===========================================
+ * COMMENT ROUTES - API Route Definitions
+ * ===========================================
+ * 
+ * Định nghĩa các REST API endpoints cho comment system.
+ * Routes chỉ map URL → Controller method, không chứa logic.
+ * 
+ * === API ENDPOINTS ===
+ * GET    /api/posts/:postId/comments                    → Lấy tất cả comments
+ * POST   /api/posts/:postId/comments                    → Tạo comment mới
+ * POST   /api/posts/:postId/comments/:commentId/replies → Reply vào comment
+ * DELETE /api/posts/:postId/comments/:commentId          → Xóa comment
+ * POST   /api/posts/:postId/comments/:commentId/like    → Like comment
+ */
+
+import { Router } from 'express';
+import * as commentController from '@/controllers/comment.controller';
 
 const router = Router({ mergeParams: true });
 
-// GET /api/posts/:postId/comments
-router.get('/', (req: Request, res: Response) => {
-    const postId = req.params.postId as string;
-    const comments = commentsStore.get(postId) || [];
-    res.json(comments);
-});
+// Lấy tất cả comments của post
+router.get('/', commentController.getComments);
 
-// POST /api/posts/:postId/comments
-router.post('/', (req: Request, res: Response) => {
-    const postId = req.params.postId as string;
-    const { content, author } = req.body;
-    if (!content || !author) {
-        return res.status(400).json({ error: 'Missing content or author' });
-    }
+// Tạo comment mới (top-level)
+router.post('/', commentController.createComment);
 
-    const newComment: Comment = {
-        id: getNextId(),
-        content,
-        author,
-        createdAt: new Date().toISOString(),
-        replies: [],
-    };
+// Reply vào một comment
+router.post('/:commentId/replies', commentController.createReply);
 
-    if (!commentsStore.has(postId)) {
-        commentsStore.set(postId, []);
-    }
-    commentsStore.get(postId)!.push(newComment);
-    res.status(201).json(newComment);
-});
+// Xóa comment
+router.delete('/:commentId', commentController.deleteComment);
 
-// POST /api/posts/:postId/comments/:commentId/replies
-router.post('/:commentId/replies', (req: Request, res: Response) => {
-    const postId = req.params.postId as string;
-    const commentId = parseInt(req.params.commentId as string);
-    const { content, author } = req.body;
-    if (!content || !author) {
-        return res.status(400).json({ error: 'Missing content or author' });
-    }
-
-    const comments = commentsStore.get(postId);
-    if (!comments) return res.status(404).json({ error: 'No comments for this post' });
-
-    const { comment, parentList } = findCommentAndParent(comments, commentId);
-    if (!comment || !parentList) {
-        return res.status(404).json({ error: 'Comment not found' });
-    }
-
-    const reply: Comment = {
-        id: getNextId(),
-        content,
-        author,
-        createdAt: new Date().toISOString(),
-        replies: [],
-    };
-    comment.replies.push(reply);
-    res.status(201).json(reply);
-});
-
-// DELETE /api/posts/:postId/comments/:commentId
-router.delete('/:commentId', (req: Request, res: Response) => {
-    const postId = req.params.postId as string;
-    const commentId = parseInt(req.params.commentId as string);
-
-    const comments = commentsStore.get(postId);
-    if (!comments) return res.status(404).json({ error: 'No comments for this post' });
-
-    const { parentList, comment } = findCommentAndParent(comments, commentId);
-    if (!parentList || !comment) {
-        return res.status(404).json({ error: 'Comment not found' });
-    }
-
-    const index = parentList.findIndex(c => c.id === commentId);
-    if (index !== -1) {
-        parentList.splice(index, 1);
-        return res.status(200).json({ message: 'Deleted' });
-    }
-    return res.status(404).json({ error: 'Comment not found' });
-});
+// Like comment
+router.post('/:commentId/like', commentController.likeComment);
 
 export default router;

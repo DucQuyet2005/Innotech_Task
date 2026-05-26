@@ -1,0 +1,52 @@
+/* ===========================================
+ * LOADING SPINNER STYLES
+ * =========================================== */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  gap: 20px;
+  animation: fadeIn var(--transition-base) ease-out;
+}
+
+.loading-spinner {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.spinner-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: var(--accent);
+  animation: spin 1s linear infinite;
+}
+
+.spinner-ring:nth-child(2) {
+  inset: 6px;
+  border-top-color: transparent;
+  border-right-color: var(--accent);
+  opacity: 0.7;
+  animation-duration: 1.5s;
+  animation-direction: reverse;
+}
+
+.spinner-ring:nth-child(3) {
+  inset: 12px;
+  border-top-color: transparent;
+  border-bottom-color: var(--accent);
+  opacity: 0.4;
+  animation-duration: 2s;
+}
+
+.loading-text {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  animation: pulse 1.5s ease-in-out infinite;
+}

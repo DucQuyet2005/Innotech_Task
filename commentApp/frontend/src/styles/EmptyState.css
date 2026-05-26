@@ -1,0 +1,31 @@
+/* ===========================================
+ * EMPTY STATE STYLES
+ * =========================================== */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  gap: 12px;
+  animation: fadeInUp var(--transition-slow) ease-out;
+}
+
+.empty-icon {
+  font-size: 48px;
+  color: var(--text-tertiary);
+  opacity: 0.4;
+  margin-bottom: 4px;
+}
+
+.empty-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.empty-description {
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
